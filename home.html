@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Jarvas AI</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: black;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            position: relative;
+        }
+        .sidebar {
+            width: 200px;
+            height: 100vh;
+            background-color: #222;
+            padding-top: 50px;
+            position: fixed;
+            left: 0;
+            top: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            padding: 15px 0;
+            width: 100%;
+            text-align: center;
+        }
+        .sidebar a:hover {
+            background-color: #444;
+        }
+        .title {
+            font-size: 36px;
+            font-weight: bold;
+            position: absolute;
+            top: 70px;
+            left: calc(50% + 30px);
+            transform: translateX(-50%);
+            white-space: nowrap;
+        }
+        .chat-container {
+            margin-left: 130px;
+            position: absolute;
+            top: 120px;
+            width: 60%;
+            height: 60vh;
+            background-color: #222;
+            border-radius: 10px;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.1);
+        }
+        .chat-message {
+            background: #444;
+            padding: 10px;
+            border-radius: 10px;
+            margin: 5px 0;
+            max-width: 80%;
+        }
+        .user-message {
+            align-self: flex-end;
+            background: #0084ff;
+        }
+        .bot-message {
+            align-self: flex-start;
+            background: #555;
+        }
+        .input-container {
+            position: absolute;
+            bottom: 20px;
+            width: 50%;
+            background-color: #333;
+            border-radius: 30px;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.1);
+            margin-left: 15px;
+        }
+        .input-container input {
+            flex: 1;
+            border: none;
+            outline: none;
+            background: transparent;
+            color: white;
+            font-size: 16px;
+            padding: 10px;
+        }
+        .input-container button {
+            background: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .info-text {
+            position: absolute;
+            bottom: 0px;
+            color: white;
+            font-size: 14px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <a href="home.html" id="home-button">Home</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="aboutUs.html">About Us</a>
+        <a href="download.html">Download</a>
+        <a href="contact.html">Contact Us</a>
+    </div>
+    <div class="title">Ask Jarvas AI Anything</div>
+    <div class="chat-container" id="chat-container">
+        <div class="chat-message bot-message">Hello! How can I assist you today?</div>
+    </div>
+    <div class="input-container">
+        <input type="text" id="chat-input" placeholder="Message Jarvas AI">
+        <button id="send-button">▶</button>
+    </div>
+    <div class="info-text">JarVas can make mistakes. Check important info.</div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const homeButton = document.getElementById("home-button");
+            if (homeButton) {
+                homeButton.addEventListener("click", function(event) {
+                    event.preventDefault();
+                    alert("Navigating to Home Page!");
+                    window.location.href = "homePage.html";
+                });
+            }
+
+            const chatContainer = document.getElementById("chat-container");
+            const userInput = document.getElementById("chat-input");
+            const sendButton = document.getElementById("send-button");
+
+            function addMessage(message, isUser = false) {
+                const messageElement = document.createElement("div");
+                messageElement.classList.add("chat-message", isUser ? "user-message" : "bot-message");
+                messageElement.textContent = message;
+                chatContainer.appendChild(messageElement);
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+            }
+
+            async function sendMessage() {
+                const message = userInput.value.trim();
+                if (message) {
+                    addMessage(`You: ${message}`, true);
+                    userInput.value = "";
+                    try {
+                        const response = await fetch('http://localhost:11434/api/generate', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ model: 'llama3.2', prompt: message, stream: false }),
+                        });
+                        if (!response.ok) throw new Error('Network response was not ok');
+                        const data = await response.json();
+                        addMessage(`Bot: ${data.response}`);
+                    } catch (error) {
+                        console.error('Error:', error);
+                        addMessage('Bot: Sorry, there was an error processing your request.');
+                    }
+                }
+            }
+
+            sendButton.addEventListener("click", sendMessage);
+            userInput.addEventListener("keypress", (e) => { if (e.key === "Enter") sendMessage(); });
+        });
+    </script>
+</body>
+</html>

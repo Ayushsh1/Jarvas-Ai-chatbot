@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+            position: relative;
+            background-color: black;
+            color: white;
+        }
+        .sidebar {
+            width: 200px;
+            height: 100vh;
+            background-color: #222;
+            padding-top: 50px;
+            position: fixed;
+            left: 0;
+            top: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-left: 0;
+            justify-content: flex-start;
+        }
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            padding: 15px 0;
+            width: 100%;
+            text-align: center;
+        }
+        .sidebar a:hover {
+            background-color: #444;
+        }
+        .login-container {
+            margin-top: auto;
+            margin-bottom: 70px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+        .login-container form {
+            width: 80%;
+        }
+        .login-container button {
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 25px;
+            background-color: white;
+            color: black;
+            font-weight: bold;
+            border: 2px solid black;
+            width: 100%;
+        }
+        .login-container button:hover {
+            background-color: #f0f0f0;
+        }
+        .content {
+            margin-left: 220px;
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: calc(100% - 220px);
+            text-align: center;
+            position: relative;
+        }
+        .logo-container {
+            position: absolute;
+            top: 10px;
+            left: 220px;
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            display: flex;
+            align-items: center;
+        }
+        .logo-container img {
+            width: 40px;
+            height: 40px;
+            margin-left: 10px;
+        }
+        .question-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 22px;
+            font-weight: bold;
+            color: white;
+            text-align: center;
+        }
+        @keyframes fadeInOut {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+        .animated-question {
+            animation: fadeInOut 4s infinite;
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const questions = [
+                "What is the future of AI?",
+                "How does machine learning work?",
+                "What is the best programming language for AI?",
+                "How can AI help in healthcare?",
+                "What are the ethical concerns of AI?"
+            ];
+            let index = 0;
+            const questionElement = document.getElementById("animated-question");
+            
+            function changeQuestion() {
+                questionElement.textContent = questions[index];
+                index = (index + 1) % questions.length;
+            }
+            
+            setInterval(changeQuestion, 4000);
+        });
+    </script>
+</head>
+<body>
+    <div class="logo-container">
+        JARVAS
+        <img src="Jarvas_logo.png" alt="Jarvas Logo">
+    </div>
+    <div class="sidebar">
+        <a href="home.html">Home</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="aboutus.html">About Us</a>
+        <a href="download.html">Download</a>
+        <a href="contact.html">Contact Us</a>
+        <div class="login-container">
+            <form action="login.html" method="get">
+                <button type="submit" class="login-btn">Login</button>
+            </form>
+        </div>
+    </div>
+    <div class="content">
+        <div class="question-container">
+            <span id="animated-question" class="animated-question">What is the future of AI?</span>
+        </div>
+    </div>
+</body>
+</html>

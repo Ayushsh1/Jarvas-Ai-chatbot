@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing - AI Chatbot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .pricing-container {
+            max-width: 900px;
+            margin-top: 50px;
+            padding: 20px;
+        }
+        .pricing-table {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .plan {
+            background: #222;
+            padding: 20px;
+            border-radius: 10px;
+            width: 250px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+        .plan h2 {
+            margin-bottom: 10px;
+        }
+        .price {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .plan ul {
+            list-style: none;
+            padding: 0;
+        }
+        .plan ul li {
+            margin: 10px 0;
+        }
+        .plan button {
+            background: white;
+            color: black;
+            border: none;
+            padding: 10px 15px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .plan button:hover {
+            background: #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="pricing-container">
+        <h1>Choose Your Plan</h1>
+        <div class="pricing-table">
+            <div class="plan">
+                <h2>Free Plan</h2>
+                <p class="price">$0/month</p>
+                <ul>
+                    <li>Basic AI Chat Access</li>
+                    <li>Limited Responses</li>
+                    <li>Standard Support</li>
+                </ul>
+                <button onclick="window.location.href='index.html'">Select Plan</button>
+            </div>
+            <div class="plan">
+                <h2>Pro Plan</h2>
+                <p class="price">$8/month</p>
+                <ul>
+                    <li>Unlimited AI Chat Access</li>
+                    <li>Faster Response Time</li>
+                    <li>Priority Support</li>
+                </ul>
+                <button>Select Plan</button>
+            </div>
+            <div class="plan">
+                <h2>Enterprise Plan</h2>
+                <p class="price">$16/month</p>
+                <ul>
+                    <li>All Pro Features</li>
+                    <li>Custom AI Models</li>
+                    <li>Dedicated Account Manager</li>
+                </ul>
+                <button>Select Plan</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

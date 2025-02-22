@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Jarvas AI</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: black;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .signup-container {
+            background: #222;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
+            text-align: center;
+            width: 300px;
+        }
+        .signup-container h2 {
+            margin-bottom: 20px;
+        }
+        .input-field {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            background: #333;
+            color: white;
+        }
+        .signup-btn {
+            width: 100%;
+            padding: 10px;
+            background-color: white;
+            color: black;
+            border: none;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 25px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .signup-btn:hover {
+            background-color: #f0f0f0;
+        }
+        .login-link {
+            display: block;
+            margin-top: 15px;
+            color: white;
+            text-decoration: none;
+        }
+        .login-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-container">
+        <h2>Create Your Jarvas AI Account</h2>
+        <form action="signup.php" method="POST">
+            <input type="text" name="username" class="input-field" placeholder="Username" required>
+            <input type="email" name="email" class="input-field" placeholder="Email Address" required>
+            <input type="password" name="password" class="input-field" placeholder="Password" required>
+            <input type="password" name="confirm-password" class="input-field" placeholder="Confirm Password" required>
+            <button type="submit" class="signup-btn">Sign Up</button>
+        </form>
+        <a href="login.html" class="login-link">Already have an account? Login</a>
+    </div>
+</body>
+</html>
